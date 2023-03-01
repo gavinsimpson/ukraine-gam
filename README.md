@@ -1,4 +1,4 @@
-# An Introduction to fitting Generalized Additive Models in R
+# Generalized Additive Models in R
 
 ## A workshop on GAMs to support Ukraine
 
