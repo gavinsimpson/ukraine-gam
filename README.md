@@ -22,12 +22,6 @@ Gavin is a statistical ecologist and freshwater ecologist/palaeoecologist. He ha
 
 Please be sure to have at least version 4.1 &mdash; *and preferably version 4.2* &mdash; of R installed (the version of my gratia package we will be using depends on you having at least version 4.1 installed and some slides might contain code that requires version 4.2). Note that R and RStudio are two different things: it is not sufficient to just update RStudio, you also need to update R by installing new versions as they are released.
 
-To download R go to the [CRAN Download](https://cran.r-project.org/) page and follow the links to download R for your operating system:
-
-* [Windows](https://cran.r-project.org/bin/windows/)
-* [MacOS X](https://cran.r-project.org/bin/macosx/)
-* [Linux](https://cran.r-project.org/bin/linux/)
-
 To check what version of R you have installed, you can run
 
 ```r
@@ -35,6 +29,12 @@ version
 ```
 
 in R and look at the `version.string` entry (or the `major` and `minor` entries).
+
+If the installed version of R is < 4.1.0, you'll need to update R by downloading and installing a newer version. To download R go to the [CRAN Download](https://cran.r-project.org/) page and follow the links to download R for your operating system:
+
+* [Windows](https://cran.r-project.org/bin/windows/)
+* [MacOS X](https://cran.r-project.org/bin/macosx/)
+* [Linux](https://cran.r-project.org/bin/linux/)
 
 We will make use of several R packages that you'll need to have installed. Prior to the start of the workshop, please run the following code to update your installed packages and then install the required packages:
 
