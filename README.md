@@ -14,6 +14,12 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7825960.svg)](https://doi.org/10.5281/zenodo.7825960)
 
+#### Donate to help Ukraine
+
+If you are able to financially, please donate to organisations helping during the ongoing war in Ukraine. While you do not need to do this to use my resources for personal learning or in your own teaching materials etc, if you can afford to make a donation, please do consider doing so if you make use of the resources here. You can also donate to sponsor a place on future workshops for students from low income countries.
+
+Dariia Mykhailyshyna, the organiser of the Workshops for Ukraine, suggests donating via [savelife.in.ua](https://savelife.in.ua/en/donate-en/). For more information on donating to fund a student place at future workshops in the [Workshops for Ukraine programme](https://sites.google.com/view/dariia-mykhailyshyna/main/r-workshops-for-ukraine), see the [Workshops'](https://sites.google.com/view/dariia-mykhailyshyna/main/r-workshops-for-ukraine) web page.
+
 ## About the workshop
 
 Generalized Additive Models (GAMs) were introduced as an extension to linear and generalized linear models, where the relationships between the response and covariates are not specified up-front by the analyst but are learned from the data themselves. This learning is achieved by representing the effect of a covariate on the response as a smooth function, rather than following a fixed form (linear, quadratic, etc). GAMs are a large and flexible class of models that are widely used in applied research because of their flexibility and interpretability.
