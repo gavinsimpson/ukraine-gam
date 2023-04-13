@@ -8,8 +8,6 @@
 
 #### Department of Animal & Veterinary Science, Aarhus University, Denmark
 
-* [Slide deck](https://gavinsimpson.github.io/ukraine-gam/slides/index.html)
-
 ## About the workshop
 
 Generalized Additive Models (GAMs) were introduced as an extension to linear and generalized linear models, where the relationships between the response and covariates are not specified up-front by the analyst but are learned from the data themselves. This learning is achieved by representing the effect of a covariate on the response as a smooth function, rather than following a fixed form (linear, quadratic, etc). GAMs are a large and flexible class of models that are widely used in applied research because of their flexibility and interpretability.
@@ -59,3 +57,31 @@ install.packages("gratia",
                  repos = c("https://gavinsimpson.r-universe.dev",
                            "https://cloud.r-project.org"))
 ```
+
+# Workshop materials
+
+## Course materials
+
+To download the materials for the workshop and get working, open RStudio and run the `use_course()` code below
+
+```r
+usethis::use_course("https://bit.ly/ukraine-gam")
+```
+
+This will prompt you to agree to the workshop materials being downloaded to the `~/Desktop` folder (where `~/` refers to your home drive/directory). Agree to this by typing the appropriate number and pressing <kbd>Return</kbd>. The materials will then be downloaded as a zip file and unpacked for you.
+
+When complete, you'll be asked if you want to delete the download `.zip` file. You can choose whichever option you prefer here.
+
+Finally, once you've answered this last question, RStudio will load the workshop project in a new RStudio session. Once the new session has started you can close the other RStudio window (the one where you ran the `use_course()` code.)
+
+### If you know what you are doing
+
+If you aren't using RStudio or know what you are doing, you can download the zip file directly from <https://bit.ly/ukraine-gam>. You are responsible then for unpacking the files correctly and starting R in the correct folder.
+
+## Slides
+
+The rendered slide deck is available online from the link below:
+
+* [Slide deck](https://gavinsimpson.github.io/ukraine-gam/slides/index.html)
+
+You should also be able to view the slides locally in your browser by opening the `slides` folder and double clicking on `index.html`.

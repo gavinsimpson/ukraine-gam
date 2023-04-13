@@ -58,9 +58,9 @@ anim_res <- 250
 
 # Logistics
 
-* HTML Slide deck [bit.ly/gam-efi-22]() &copy; Simpson (2023) [![Creative Commons Licence](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
+* HTML Slide deck [bit.ly/ukraine-gam-slides](https://bit.ly/ukraine-gam-slides) &copy; Simpson (2023) [![Creative Commons Licence](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
 
-* RMarkdown [bit.ly/gam-efi-git](https://bit.ly/gam-efi-git)
+* RMarkdown [bit.ly/ukrain-gam-repo](https://bit.ly/ukraine-gam-repo)
 
 ---
 class: inverse middle center subsection
@@ -1939,13 +1939,11 @@ class: inverse center middle subsection
 
 Read Simon Wood's book!
 
-Lots more material on our ESA GAM Workshop site
-
-[https://noamross.github.io/mgcv-esa-workshop/]()
-
 Noam Ross' free GAM Course
 
 <https://noamross.github.io/gams-in-r-course/>
+
+Lots more material on my [GAM course](https://github.com/gavinsimpson/physalia-gam-course) for [Physalia Courses](https://www.physalia-courses.org/)
 
 A couple of papers:
 
@@ -1973,6 +1971,5 @@ Also see my blog: [www.fromthebottomoftheheap.net](http://www.fromthebottomofthe
 
 ### Slides
 
-* HTML Slide deck [bit.ly/gam-efi-22]() &copy; Simpson (2023) [![Creative Commons Licence](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
-* RMarkdown [bit.ly/gam-efi-git](https://bit.ly/gam-efi-git)
-
+* HTML Slide deck [bit.ly/ukraine-gam-slides](https://bit.ly/ukraine-gam-slides) &copy; Simpson (2023) [![Creative Commons Licence](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
+* RMarkdown [bit.ly/ukrain-gam-repo](https://bit.ly/ukraine-gam-repo)
