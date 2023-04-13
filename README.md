@@ -8,7 +8,7 @@
 
 #### Department of Animal & Veterinary Science, Aarhus University, Denmark
 
-* [Slide deck](https://gavinsimpson.github.io/ukrains-gam/slides/index.html)
+* [Slide deck](https://gavinsimpson.github.io/ukraine-gam/slides/index.html)
 
 ## About the workshop
 
