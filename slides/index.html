@@ -108,6 +108,11 @@ class: inverse middle center subsection
 # GAMs offer a solution
 
 ---
+class: inverse middle center big-subsection
+
+# Example
+
+---
 
 # HadCRUT data set
 
@@ -221,13 +226,13 @@ GAMs are an intermediate-complexity model
 
 In LM we model the mean of data as a sum of linear terms:
 
-`$$y_i = \beta_0 +\sum_j \color{red}{ \beta_j x_{ji}} +\epsilon_i$$`
+`$$y_i = \beta_0 +\sum_j \color{red}{ \beta_j x_{ji}} + \epsilon_i$$`
 
 A GAM is a sum of _smooth functions_ or _smooths_
 
-`$$y_i = \beta_0 + \sum_j \color{red}{s_j(x_{ji})} + \epsilon_i$$`
+`$$y_i = \beta_0 + \sum_j \color{red}{f_j(x_{ji})} + \epsilon_i$$`
 
-where `\(\epsilon_i \sim N(0, \sigma^2)\)`, `\(y_i \sim \text{Normal}\)` (for now)
+where `\(\epsilon_i \sim N(0, \sigma^2)\)`, `\(y_i | \mathbf{X} \sim \text{Normal}\)` (for now)
 
 Call the above equation the **linear predictor** in both cases
 
@@ -306,7 +311,7 @@ When we model using splines, each basis function `\(b_k\)` has a coefficient `\(
 
 Resultant spline is a the sum of these weighted basis functions, evaluated at the values of `\(x\)`
 
-`$$s(x) = \sum_{k = 1}^K \beta_k b_k(x)$$`
+`$$f(x) = \sum_{k = 1}^K \beta_k b_k(x)$$`
 
 ---
 
@@ -781,142 +786,6 @@ Follows (sort of) Tidyverse principles
 * suitable for plotting with {ggplot2}
 
 * graphics use {ggplot2} and {patchwork}
-
----
-
-# Simulated Motorcycle Accident
-
-A data frame giving a series of measurements of head acceleration in a simulated motorcycle accident, used to test crash helmets
-
-
-```r
-library("dplyr")
-data(mcycle, package = "MASS")
-mcycle &lt;- as_tibble(mcycle)
-mcycle
-```
-
-```
-## # A tibble: 133 × 2
-##    times accel
-##    &lt;dbl&gt; &lt;dbl&gt;
-##  1   2.4   0  
-##  2   2.6  -1.3
-##  3   3.2  -2.7
-##  4   3.6   0  
-##  5   4    -2.7
-##  6   6.2  -2.7
-##  7   6.6  -2.7
-##  8   6.8  -1.3
-##  9   7.8  -2.7
-## 10   8.2  -2.7
-## # ℹ 123 more rows
-```
----
-
-# Simulated Motorcycle Accident
-
-.row[
-.col-6[
-
-```r
-plt &lt;- mcycle %&gt;%
-  ggplot(aes(x = times, y = accel)) +
-    geom_point() +
-    labs(x = "Milliseconds after impact",
-         y = expression(italic(g)))
-plt
-```
-]
-
-.col-6[
-![](index_files/figure-html/plot-mcycle-1.svg)&lt;!-- --&gt;
-]
-]
-
----
-
-# `draw()`
-
-The main function is `draw()`
-
-Has methods for many of the function outputs in {gratia} and for models
-
----
-
-# Plotting smooths
-
-
-```r
-data(mcycle, package = "MASS")
-m &lt;- gam(accel ~ s(times), data = mcycle, method = "REML")
-draw(m)
-```
-
-&lt;img src="index_files/figure-html/draw-mcycle-1.svg" width="90%" style="display: block; margin: auto;" /&gt;
-
-
----
-
-# Plotting smooths
-
-
-```r
-df &lt;- data_sim("eg1", n = 1000, seed = 42)
-df
-```
-
-```
-## # A tibble: 1,000 × 10
-##          y    x0     x1    x2    x3     f    f0    f1          f2    f3
-##      &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
-##  1  6.49   0.915 0.848  0.990 0.274  5.98 0.529  5.46 0.000000183     0
-##  2  4.32   0.937 0.0627 0.438 0.944  4.88 0.393  1.13 3.35            0
-##  3  6.17   0.286 0.820  0.700 0.446  9.62 1.57   5.15 2.90            0
-##  4  0.0454 0.830 0.539  0.889 0.542  4.06 1.02   2.94 0.102           0
-##  5  2.50   0.642 0.499  0.834 0.162  5.08 1.80   2.71 0.566           0
-##  6  6.13   0.519 0.0222 0.734 0.693  5.40 2.00   1.05 2.36            0
-##  7  7.50   0.737 0.554  0.647 0.797  7.80 1.47   3.03 3.30            0
-##  8  4.03   0.135 0.720  0.843 0.774  5.50 0.821  4.22 0.459           0
-##  9  8.95   0.657 0.236  0.160 0.213 10.5  1.76   1.60 7.15            0
-## 10 13.2    0.705 0.812  0.364 0.204 12.1  1.60   5.07 5.43            0
-## # ℹ 990 more rows
-```
-
-```r
-m_sim &lt;- gam(y ~ s(x0) + s(x1) + s(x2) + s(x3),
-             data = df, method = "REML")
-draw(m_sim)
-```
-
----
-
-# Plotting smooths
-
-.center[
-&lt;img src="index_files/figure-html/draw-four-fun-sim-plot-1.svg" width="95%" /&gt;
-]
-
----
-
-# Plotting smooths
-
-
-```r
-draw(m_sim,
-     residuals = TRUE,           # add partial residuals
-     overall_uncertainty = TRUE, # include uncertainty due to constant
-     unconditional = TRUE,       # correct for smoothness selection
-     rug = FALSE)                # turn off rug plot
-```
-
----
-
-# Plotting smooths
-
-.center[
-&lt;img src="index_files/figure-html/draw-mcycle-options-plot-1.svg" width="95%" /&gt;
-]
 
 ---
 class: inverse center middle subsection

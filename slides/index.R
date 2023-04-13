@@ -497,62 +497,6 @@ m_nlme <- lme(travel ~ 1, data = Rail, ~ 1 | Rail, method = "REML")
 m_gam  <- gam(travel ~ s(Rail, bs = "re"), data = Rail, method = "REML")
 
 
-## -----------------------------------------------------------------------------
-library("dplyr")
-data(mcycle, package = "MASS")
-mcycle <- as_tibble(mcycle)
-mcycle
-
-
-## ----plot-mcycle, eval = FALSE------------------------------------------------
-## plt <- mcycle %>%
-##   ggplot(aes(x = times, y = accel)) +
-##     geom_point() +
-##     labs(x = "Milliseconds after impact",
-##          y = expression(italic(g)))
-## plt
-
-
-## ----plot-mcycle, fig.width = 6, fig.height = 4, echo = FALSE-----------------
-plt <- mcycle %>%
-  ggplot(aes(x = times, y = accel)) +
-    geom_point() +
-    labs(x = "Milliseconds after impact",
-         y = expression(italic(g)))
-plt
-
-
-## ----draw-mcycle, out.width = "90%", fig.align = "center"---------------------
-data(mcycle, package = "MASS")
-m <- gam(accel ~ s(times), data = mcycle, method = "REML")
-draw(m)
-
-
-## ----draw-four-fun-sim, fig.show = "hide"-------------------------------------
-df <- data_sim("eg1", n = 1000, seed = 42)
-df
-m_sim <- gam(y ~ s(x0) + s(x1) + s(x2) + s(x3),
-             data = df, method = "REML")
-draw(m_sim)
-
-
-## ----draw-four-fun-sim-plot, echo = FALSE, out.width = "95%"------------------
-draw(m_sim)
-
-
-## ----draw-mcycle-options, fig.show = "hide"-----------------------------------
-draw(m_sim,
-     residuals = TRUE,           # add partial residuals
-     overall_uncertainty = TRUE, # include uncertainty due to constant
-     unconditional = TRUE,       # correct for smoothness selection
-     rug = FALSE)                # turn off rug plot
-
-
-## ----draw-mcycle-options-plot, out.width = "95%", echo = FALSE----------------
-draw(m_sim, residuals = TRUE, overall_uncertainty = TRUE,
-     unconditional = TRUE, rug = FALSE)
-
-
 ## ----misspecify, echo = FALSE, out.width = "95%"------------------------------
 set.seed(15)
 model_list = c("right model",
@@ -647,9 +591,10 @@ gam.check(norm_model_3)
 
 
 ## ----gam_check_norm4, echo = FALSE--------------------------------------------
-p1 <- draw(norm_model_1)
-p2 <- draw(norm_model_2)
-p3 <- draw(norm_model_3)
+thm <- theme_bw(base_size = 12, base_family = 'Fira Sans')
+p1 <- draw(norm_model_1) & thm
+p2 <- draw(norm_model_2) & thm
+p3 <- draw(norm_model_3) & thm
 
 ## plot_grid(p1, p2, p3, nrow = 3, align = 'hv', axis = 'lrtb')
 wrap_plots(p1, p2, p3, nrow = 3)

@@ -56,11 +56,10 @@ AIC(m, m_sub)
 # Look at the complex model
 summary(m)
 
-# plot.gam output
-plot(m, pages = 1, scheme = 2, shade = TRUE)
-
-# draw() output
+# plot the model
 draw(m, scales = "free")
+# or
+# plot(m, pages = 1, scheme = 2, shade = TRUE)
 
 # spatial predictions over time
 pdata <- data_slice(m, ToD = 12, DoY = 180,
@@ -71,13 +70,13 @@ fv <- fitted_values(m, data = pdata)
 # set fitted values to NA for grid points that are too far from the data
 ind <- too_far(pdata$LONGITUDE, pdata$LATITUDE,
                galveston$LONGITUDE, galveston$LATITUDE, dist = 0.1)
-fv <- fv %>%
+fv <- fv |>
   mutate(fitted = if_else(ind, NA_real_, fitted))
 
 # plot the estimated spatial field over time
 ggplot(fv, aes(x = LONGITUDE, y = LATITUDE)) +
   geom_raster(aes(fill = fitted)) + facet_wrap(~ YEAR, ncol = 12) +
-  scale_fill_viridis(name = expression(degree*C), option = "plasma",
+  scale_fill_viridis(name = expression(degree * C), option = "plasma",
                      na.value = "transparent") +
   coord_quickmap() +
   scale_x_continuous(guide = guide_axis(n.dodge = 2,

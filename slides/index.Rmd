@@ -158,6 +158,11 @@ class: inverse middle center subsection
 # GAMs offer a solution
 
 ---
+class: inverse middle center big-subsection
+
+# Climate example
+
+---
 
 # HadCRUT data set
 
@@ -245,13 +250,13 @@ GAMs are an intermediate-complexity model
 
 In LM we model the mean of data as a sum of linear terms:
 
-$$y_i = \beta_0 +\sum_j \color{red}{ \beta_j x_{ji}} +\epsilon_i$$
+$$y_i = \beta_0 +\sum_j \color{red}{ \beta_j x_{ji}} + \epsilon_i$$
 
 A GAM is a sum of _smooth functions_ or _smooths_
 
-$$y_i = \beta_0 + \sum_j \color{red}{s_j(x_{ji})} + \epsilon_i$$
+$$y_i = \beta_0 + \sum_j \color{red}{f_j(x_{ji})} + \epsilon_i$$
 
-where $\epsilon_i \sim N(0, \sigma^2)$, $y_i \sim \text{Normal}$ (for now)
+where $\epsilon_i \sim N(0, \sigma^2)$, $y_i | \mathbf{X} \sim \text{Normal}$ (for now)
 
 Call the above equation the **linear predictor** in both cases
 
@@ -408,7 +413,7 @@ When we model using splines, each basis function $b_k$ has a coefficient $\beta_
 
 Resultant spline is a the sum of these weighted basis functions, evaluated at the values of $x$
 
-$$s(x) = \sum_{k = 1}^K \beta_k b_k(x)$$
+$$f(x) = \sum_{k = 1}^K \beta_k b_k(x)$$
 
 ---
 
@@ -655,6 +660,11 @@ In **mgcv**, default $k$ values are arbitrary &mdash; after choosing the model t
 3. Use a **penalty** to trade off wiggliness/generality 
 
 4. Need to make sure your smooths are **wiggly enough**
+
+---
+class: inverse middle center subsection
+
+# Ozone example
 
 ---
 class: inverse middle center subsection
@@ -1078,104 +1088,6 @@ Follows (sort of) Tidyverse principles
 * graphics use {ggplot2} and {patchwork}
 
 ---
-
-# Simulated Motorcycle Accident
-
-A data frame giving a series of measurements of head acceleration in a simulated motorcycle accident, used to test crash helmets
-
-```{r}
-library("dplyr")
-data(mcycle, package = "MASS")
-mcycle <- as_tibble(mcycle)
-mcycle
-```
----
-
-# Simulated Motorcycle Accident
-
-.row[
-.col-6[
-```{r plot-mcycle, eval = FALSE}
-plt <- mcycle %>%
-  ggplot(aes(x = times, y = accel)) +
-    geom_point() +
-    labs(x = "Milliseconds after impact",
-         y = expression(italic(g)))
-plt
-```
-]
-
-.col-6[
-```{r plot-mcycle, fig.width = 6, fig.height = 4, echo = FALSE}
-```
-]
-]
-
----
-
-# `draw()`
-
-The main function is `draw()`
-
-Has methods for many of the function outputs in {gratia} and for models
-
----
-
-# Plotting smooths
-
-```{r draw-mcycle, out.width = "90%", fig.align = "center"}
-data(mcycle, package = "MASS")
-m <- gam(accel ~ s(times), data = mcycle, method = "REML")
-draw(m)
-```
-
-
----
-
-# Plotting smooths
-
-```{r draw-four-fun-sim, fig.show = "hide"}
-df <- data_sim("eg1", n = 1000, seed = 42)
-df
-m_sim <- gam(y ~ s(x0) + s(x1) + s(x2) + s(x3),
-             data = df, method = "REML")
-draw(m_sim)
-```
-
----
-
-# Plotting smooths
-
-.center[
-```{r draw-four-fun-sim-plot, echo = FALSE, out.width = "95%"}
-draw(m_sim)
-```
-]
-
----
-
-# Plotting smooths
-
-```{r draw-mcycle-options, fig.show = "hide"}
-draw(m_sim,
-     residuals = TRUE,           # add partial residuals
-     overall_uncertainty = TRUE, # include uncertainty due to constant
-     unconditional = TRUE,       # correct for smoothness selection
-     rug = FALSE)                # turn off rug plot
-```
-
----
-
-# Plotting smooths
-
-.center[
-```{r draw-mcycle-options-plot, out.width = "95%", echo = FALSE}
-draw(m_sim, residuals = TRUE, overall_uncertainty = TRUE,
-     unconditional = TRUE, rug = FALSE)
-```
-]
-
----
 class: inverse center middle subsection
 
 # Model checking
@@ -1351,9 +1263,10 @@ gam.check(norm_model_3)
 # Checking basis size
 
 ```{r gam_check_norm4, echo = FALSE}
-p1 <- draw(norm_model_1)
-p2 <- draw(norm_model_2)
-p3 <- draw(norm_model_3)
+thm <- theme_bw(base_size = 12, base_family = 'Fira Sans')
+p1 <- draw(norm_model_1) & thm
+p2 <- draw(norm_model_2) & thm
+p3 <- draw(norm_model_3) & thm
 
 ## plot_grid(p1, p2, p3, nrow = 3, align = 'hv', axis = 'lrtb')
 wrap_plots(p1, p2, p3, nrow = 3)
@@ -1452,7 +1365,7 @@ gam.check(pois_model, rep = 500)
 
 ---
 
-# NB data, NB model
+# NegBin data, NegBin model
 
 ```{r gam_check_plots3, include=T,echo=TRUE, results="hide", out.width = "90%", fig.align = "center"}
 negbin_model <- gam(y_negbinom ~ s(x1, k=12) + s(x2, k=12), family = nb, method="REML")
@@ -1461,7 +1374,7 @@ gam.check(negbin_model, rep = 500)
 
 ---
 
-# NB data, NB model
+# NegBin data, NegBin model
 
 ```{r appraise-gam-check-example, fig.height = 5.5}
 appraise(negbin_model, method = 'simulate')
