@@ -6,13 +6,13 @@ vapply(pkgs, library, logical(1L), logical.return = TRUE,
        character.only = TRUE)
 
 # read in the data
-galveston <- read_csv(here("data", "galveston.csv")) %>%
+galveston <- read_csv("https://bit.ly/gam-galveston") %>%
     mutate(datetime = as.POSIXct(paste(DATE, TIME),
-                                 format = "%m/%d/%y %H:%M", tz = "CDT"),
+                                 format = '%m/%d/%y %H:%M', tz = "CDT"),
            STATION_ID = factor(STATION_ID),
-           DoY = as.numeric(format(datetime, format = "%j")),
-           ToD = as.numeric(format(datetime, format = "%H")) +
-               (as.numeric(format(datetime, format = "%M")) / 60))
+           DoY = as.numeric(format(datetime, format = '%j')),
+           ToD = as.numeric(format(datetime, format = '%H')) +
+               (as.numeric(format(datetime, format = '%M')) / 60))
 galveston
 
 # set boundary knots for the DoY smooth
