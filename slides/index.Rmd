@@ -46,21 +46,17 @@ anim_dev <- 'png'
 anim_res <- 250
 ```
 
-# Today's topics
-
-* What are GAMs?
-
-* How to fit GAMs in R with **mgcv**
-
-* Examples
-
----
-
 # Logistics
 
 * HTML Slide deck [bit.ly/ukraine-gam-slides](https://bit.ly/ukraine-gam-slides) &copy; Simpson (2023) [![Creative Commons Licence](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
+* RMarkdown [bit.ly/ukraine-gam-repo](https://bit.ly/ukraine-gam-repo)
+* DOI: [10.5281/zenodo.7825960](https://doi.org/10.5281/zenodo.7825960)
 
-* RMarkdown [bit.ly/ukrain-gam-repo](https://bit.ly/ukraine-gam-repo)
+Open RStudio & run
+
+```{r use-course, echo = TRUE, eval = FALSE}
+usethis::use_course("https://bit.ly/ukraine-gam")
+```
 
 ---
 class: inverse middle center subsection
@@ -1885,4 +1881,5 @@ Also see my blog: [www.fromthebottomoftheheap.net](http://www.fromthebottomofthe
 ### Slides
 
 * HTML Slide deck [bit.ly/ukraine-gam-slides](https://bit.ly/ukraine-gam-slides) &copy; Simpson (2023) [![Creative Commons Licence](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
-* RMarkdown [bit.ly/ukrain-gam-repo](https://bit.ly/ukraine-gam-repo)
+* RMarkdown [bit.ly/ukraine-gam-repo](https://bit.ly/ukraine-gam-repo)
+* DOI: [10.5281/zenodo.7825960](https://doi.org/10.5281/zenodo.7825960)

@@ -29,6 +29,10 @@ anim_dev <- 'png'
 anim_res <- 250
 
 
+## ----use-course, echo = TRUE, eval = FALSE------------------------------------
+## usethis::use_course("https://bit.ly/ukraine-gam")
+
+
 ## ----hadcrut-temp-example, echo = FALSE---------------------------------------
 library("readr")
 library("dplyr")
