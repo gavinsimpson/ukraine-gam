@@ -30,8 +30,6 @@ vapply(pkgs, library, logical(1L), character.only = TRUE,
 
 # load the data
 ozone <- read_csv("https://bit.ly/gam-ozone-data")
-# or with here
-#ozone <- read_csv(here("data", "ozone.csv"))
 
 # analysis
 
@@ -64,6 +62,8 @@ m1 <- gam(O3 ~ s(temp) + s(ibh) + s(ibt),
 summary(m1)
 draw(m1)
 
+AIC(lm1, m1)
+
 # Is the relationship between ozone and temperature linear?
 # We test for this by adding a linear term, but then we have to remove the
 # linear basis function from the TPRS of temperature. That is done by specifying
@@ -92,8 +92,8 @@ sm_s_temp <- smooth_estimates(m2, "s(temp)")
 # and plot it with the 50 posterior draws
 draw(sm_s_temp) +
     geom_line(data = samp_s_temp,
-        aes(y = value, x = .x1, group = draw),
-    alpha = 0.3, colour = "steelblue", size = 1)
+        aes(y = value, x = temp, group = draw),
+    alpha = 0.3, colour = "steelblue", linewidth = 1)
 
 # diagnostics
 appraise(m1, method = "simulate")
@@ -109,23 +109,20 @@ appraise(m3)
 # and use the negative binomial distribution for this
 
 # negative binomial model
-m4 <- gam(O3 ~ s(temp) + s(ibh) + s(ibt),
-    data = ozone, method = "ML", family = nb())
+m4 <- update(m1, . ~ ., family = nb())
 summary(m4)
 draw(m4)
 appraise(m4, method = "simulate")
 
 # quasipoisson model
-m5 <- gam(O3 ~ s(temp) + s(ibh) + s(ibt),
-    data = ozone, method = "ML", family = quasipoisson())
+m5 <- update(m1, . ~ ., family = quasipoisson())
 summary(m5)
 draw(m5)
 appraise(m5, method = "simulate")
 
 # the Tweedie has perhaps the best justification so we'll proceed with that
 # we could perform model selection using `select = TRUE`
-m6 <- gam(O3 ~ s(temp) + s(ibh) + s(ibt),
-    data = ozone, method = "ML", family = tw(), select = TRUE)
+m6 <- update(m3, . ~ ., select = TRUE)
 summary(m6)
 draw(m6)
 # we see that f(ibt) has been essentially shrunken out of the model
