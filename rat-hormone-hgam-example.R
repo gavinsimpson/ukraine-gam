@@ -9,7 +9,7 @@ vapply(pkgs, library, logical(1), character.only = TRUE, logical.return = TRUE,
 
 rats_url <- "https://bit.ly/rat-hormone"
 rats <- read_table(rats_url, col_types = "dddddddddddd-")
-# ignore the warning - it"s due to trailing white space at the ends of each
+# ignore the warning - it.s due to trailing white space at the ends of each
 #   row in the file
 
 rats <- rats %>%
@@ -41,24 +41,24 @@ K <- 7
 ## This is Model G
 m1_hgam <- gam(response ~ s(time, k = K) +
                   s(subject, bs = "re"),
-               data = rats, method = "REML")
+               data = rats, method = "REML", na.action = "na.exclude")
 
 ## this is Model S at the treatment level
 m2_hgam <- gam(response ~ s(time, treatment, bs = "fs", k = K) +
                   s(subject, bs = "re"),
-               data = rats, method = "REML")
+               data = rats, method = "REML", na.action = "na.exclude")
 
 ## this is Model I at the treatment level
 m3_hgam <- gam(response ~ treatment +
                  s(time, by = treatment, k = K) +
                  s(subject, bs = "re"),
-               data = rats, method = "REML")
+               data = rats, method = "REML", na.action = "na.exclude")
 
 ## this is Model GI at the treatment level
 m4_hgam <- gam(response ~ treatment + s(time, k = K) +
                   s(time, by = treatment, k = K, m = 1) +
                   s(subject, bs = "re"),
-               data = rats, method = "REML")
+               data = rats, method = "REML", na.action = "na.exclude")
 
 new_data <- tidyr::expand(rats, nesting(subject, treatment),
                           time = evenly(time, n = 100))
@@ -75,7 +75,7 @@ ggplot(fv, aes(x = time, y = fitted,
 m5_hgam <- gam(response ~ s(time, k = K) +
                   s(time, treatment, bs = "fs", k = K) +
                   s(subject, bs = "re"),
-               data = rats, method = "REML")
+               data = rats, method = "REML", na.action = "na.exclude")
 
 fv <- fitted_values(m5_hgam, data = new_data)
 
@@ -89,7 +89,7 @@ ggplot(fv, aes(x = time, y = fitted,
 m6_hgam <- gam(response ~ s(time, k = K) +
                   s(time, treatment, bs = "fs", k = K) +
                   s(time, subject, bs = "fs", k = 4), # not enough data for more
-               data = rats, method = "REML")
+               data = rats, method = "REML", na.action = "na.exclude")
 
 fv <- fitted_values(m6_hgam, data = new_data)
 
@@ -103,11 +103,11 @@ ggplot(fv, aes(x = time, y = fitted,
 ## no top level common smooth effect
 m7_hgam <- gam(response ~ s(time, treatment, bs = "fs", k = K) +
                   s(time, subject, bs = "fs", k = 4), # not enough data for more
-               data = rats, method = "REML")
+               data = rats, method = "REML", na.action = "na.exclude")
 
 ## This is Model S smooths only at the lowest subject level
 m8_hgam <- gam(response ~ s(time, subject, bs = "fs", k = 5), # not enough data for more
-               data = rats, method = "REML")
+               data = rats, method = "REML", na.action = "na.exclude")
 
 AIC(m1_hgam, m2_hgam, m3_hgam, m4_hgam, m5_hgam, m6_hgam, m7_hgam, m8_hgam) %>%
    as_tibble() %>%
@@ -125,3 +125,6 @@ draw(m3_hgam)
 draw(m4_hgam)
 
 draw(m8_hgam)
+
+
+draw(m3_hgam, residuals = TRUE, rug = FALSE, grouped_by = TRUE, parametric = TRUE)
