@@ -8,6 +8,8 @@
 
 #### Department of Animal & Veterinary Science, Aarhus University, Denmark
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7825960.svg)](https://doi.org/10.5281/zenodo.7825960)
+
 ## About the workshop
 
 Generalized Additive Models (GAMs) were introduced as an extension to linear and generalized linear models, where the relationships between the response and covariates are not specified up-front by the analyst but are learned from the data themselves. This learning is achieved by representing the effect of a covariate on the response as a smooth function, rather than following a fixed form (linear, quadratic, etc). GAMs are a large and flexible class of models that are widely used in applied research because of their flexibility and interpretability.
